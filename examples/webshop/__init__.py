@@ -1,0 +1,1 @@
+"""WebShop training example."""

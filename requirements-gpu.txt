@@ -1,0 +1,19 @@
+# CUDA stack based on the recovered experiment installation script.
+# Ancillary pins define the release environment; GPU installation must be validated on Linux.
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
+vllm==0.8.5.post1
+tensordict==0.6.2
+torchdata==0.11.0
+transformers==4.51.1
+numpy<2
+accelerate
+codetiming
+dill
+peft==0.18.1
+pyarrow>=19.0.1
+pybind11
+qwen-vl-utils
+liger-kernel
+ray[default]==2.55.1

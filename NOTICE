@@ -1,0 +1,5 @@
+SC-GRPO builds on the rLLM / Agentica framework and veRL.
+Upstream copyright and license headers are retained in the source files.
+The vendored veRL license and attribution are in verl/LICENSE and verl/Notice.txt.
+Project-specific changes include SC-GRPO trajectory routing, self-conditioned
+teacher scoring, token-level KL weighting, and experiment entry points.
