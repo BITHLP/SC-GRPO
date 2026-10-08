@@ -164,10 +164,13 @@ Built on [rLLM](https://github.com/rllm-org/rllm) and [veRL](https://github.com/
 ## Citation
 
 ```bibtex
-@article{shan2026scgrpo,
-  title={Learning from Own Solutions: Self-Conditioned Credit Assignment for Reinforcement Learning with Verifiable Rewards},
-  author={Shan, Yingyu and Guo, Yuhang and Cheng, Zihao and Liu, Zeming and Zhu, Xiangrong and Wang, Xinyi and Yao, Jiashu and Lin, Wei and Wang, Hongru and Huang, Heyan},
-  journal={arXiv preprint arXiv:2606.18810},
-  year={2026}
+@misc{shan2026learningsolutionsselfconditionedcredit,
+      title={Learning from Own Solutions: Self-Conditioned Credit Assignment for Reinforcement Learning with Verifiable Rewards}, 
+      author={Yingyu Shan and Yuhang Guo and Zihao Cheng and Zeming Liu and Xiangrong Zhu and Xinyi Wang and Jiashu Yao and Wei Lin and Hongru Wang and Heyan Huang},
+      year={2026},
+      eprint={2606.18810},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2606.18810}, 
 }
 ```
