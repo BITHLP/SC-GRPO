@@ -33,19 +33,39 @@ SC-GRPO improves average performance by **8.07 percentage points over GRPO** and
 
 ## Installation
 
-Environment setup follows the **rLLM `scripts/install_verl.sh` used in our experiments**. The release includes a portable version at [scripts/install_verl.sh](scripts/install_verl.sh), which installs the inference frameworks, PyTorch, verifier dependencies, FlashAttention, FlashInfer, OpenCV, the modified veRL backend, and rLLM.
+We used two conda environments: **`rllm` for general training** and **`rllm-webshop` for WebShop training**. Both use Linux x86_64, PyTorch 2.6.0 with CUDA 12.4, and the following inference stack:
 
-Use Linux x86_64 with NVIDIA GPUs. Create a Python 3.11 environment and run the script from this repository:
+| Package | General training (`rllm`) | WebShop training (`rllm-webshop`) |
+| --- | --- | --- |
+| Python | 3.11.8 | 3.10.0 |
+| PyTorch | 2.6.0+cu124 | 2.6.0+cu124 |
+| vLLM | 0.8.5.post1 | 0.8.5.post1 |
+| SGLang | 0.4.6.post5 | 0.4.6.post5 |
+| Transformers | 4.51.1 | 4.51.1 |
+| TensorDict | 0.8.3 | 0.6.2 |
+| Ray | 2.54.0 | 2.54.0 |
+| FlashAttention | 2.7.4.post1 | 2.7.4.post1 |
+| FlashInfer | 0.2.2.post1+cu124torch2.6 | 0.2.2.post1+cu124torch2.6 |
+| NumPy | 1.26.4 | 1.26.4 |
+| PEFT | 0.18.1 | 0.18.1 |
+
+Environment setup started from the **rLLM `scripts/install_verl.sh` used in our experiments**. The release includes a portable version at [scripts/install_verl.sh](scripts/install_verl.sh). Create the environment for your task and run it from this repository:
 
 ```bash
-conda create -n sc-grpo python=3.11 -y
-conda activate sc-grpo
+# General training
+conda create -n rllm python=3.11.8 -y
+conda activate rllm
+bash scripts/install_verl.sh
+
+# WebShop training: use a separate environment
+conda create -n rllm-webshop python=3.10.0 -y
+conda activate rllm-webshop
 bash scripts/install_verl.sh
 ```
 
-The script retains the original stack: **PyTorch 2.6.0**, **vLLM 0.8.5.post1**, **SGLang 0.4.6.post5**, **TensorDict 0.6.2**, **FlashAttention 2.7.4.post1**, and **FlashInfer 0.2.2.post1**. Its prebuilt attention wheels target CUDA 12 / CUDA 12.4 and the C++11 ABI setting used in the original environment. The FlashAttention wheel is selected for the active Python version.
+The table records the installed experiment environments. The installer is the setup starting point: it installs TensorDict 0.6.2 and leaves several packages, including Ray, unpinned. `requirements-gpu.txt` is a separate installation reference that currently pins Ray 2.55.1 and TensorDict 0.6.2. Use the versions in the table when matching the experiment environments.
 
-For local wheel files, supply their paths:
+Both environments use **CUDA 12.4 and C++11 ABI=false**. FlashAttention uses a `cp311` wheel for general training and a `cp310` wheel for WebShop; the installer selects the wheel for the active Python version. FlashInfer uses the CUDA 12.4 / PyTorch 2.6 wheel. For local wheel files, supply their paths:
 
 ```bash
 FLASH_ATTN_WHEEL=/path/to/flash_attn.whl \
@@ -53,7 +73,7 @@ FLASHINFER_WHEEL=/path/to/flashinfer_python.whl \
   bash scripts/install_verl.sh
 ```
 
-The launchers default to one node with eight GPUs. Task-specific environment setup is described in [environment setup](docs/environments.md).
+WebShop additionally uses **OpenJDK 11.0.23, Pyserini 0.17.0, and PyJNIus 1.7.0** in its training environment. See [environment setup](docs/environments.md) for the backend and additional package versions. The launchers default to one node with eight GPUs.
 
 ## Main experiments
 
